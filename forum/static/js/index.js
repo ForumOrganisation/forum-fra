@@ -1,28 +1,14 @@
 $(document).ready(function() {
     "use strict";
 
-    /******************** TYPED ********************/
-    $(function() {
-        $(".element").typed({
-            strings: ["Échangez", "Rencontrez", "Recrutez"],
-            typeSpeed: 50,
-            backSpeed: 100,
-            backDelay: 1000,
-        });
-    });
-
     /******************** NAVBAR ********************/
     var animationProp = $('.navbar-nemo'); //Navbar wraper
+    var scrollPos = $(this).scrollTop(),
+        animationEndPos = 150,
+        logo = animationProp.find('.navbar-brand img');
 
-    if (matchMedia('only screen and (min-width: 769px)').matches && animationProp.hasClass('navbar-transparent')) {
-        var scrollPos = $(this).scrollTop(),
-            animationEndPos = 150, //At the point background add
-            logo = animationProp.find('.navbar-brand img');
-
+    if (animationProp.hasClass('navbar-transparent') && matchMedia('only screen and (min-width: 769px)').matches) {
         //if visitor refresh on the middle of the document
-        if (scrollPos == 0) {
-            logo.attr('src', 'static/images/fo-alt.png');
-        }
         if (scrollPos > animationEndPos) {
             animationProp.removeClass('navbar-transparent');
             logo.attr('src', 'static/images/fo-base.png');
@@ -33,15 +19,25 @@ $(document).ready(function() {
             scrollPos = $(this).scrollTop();
             if (scrollPos > animationEndPos) {
                 animationProp.removeClass('navbar-transparent');
-                //change logo into black
                 logo.attr('src', 'static/images/fo-base.png');
             } else {
                 animationProp.addClass('navbar-transparent');
-                //change logo into base
                 logo.attr('src', 'static/images/fo-alt.png');
             }
         });
+    } else {
+        logo.attr('src', 'static/images/fo-base.png');
     }
+
+    /******************** TYPED ********************/
+    $(function() {
+        $(".element").typed({
+            strings: ["Échangez", "Rencontrez", "Recrutez"],
+            typeSpeed: 50,
+            backSpeed: 100,
+            backDelay: 1000,
+        });
+    });
 
     /******************** BACKGROUND VIDEO ********************/
     var vidContainer1 = document.querySelector(".video-player");
