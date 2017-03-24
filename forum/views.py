@@ -17,6 +17,12 @@ from mailing import send_mail
 from bson.objectid import ObjectId
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return redirect('https://www.forumorg.org/', code=301)
+
+
 # Admin
 @app.route('/dashboard')
 @app.route('/dashboard/<page>')
